@@ -9,7 +9,7 @@
 
 ## Description
 
-This is an elo-based ranking for the high school division nationwide in Science Olympiad. 
+This is an elo-based ranking for the high school division nationwide in Science Olympiad. From what I have seen, when I created this(around August 2023), it was the first iteration of a "Science Olympiad Elo," so unless proven otherwise, this is the first national public iteration of Science Olympiad Elo: Jeloo. The name was a combination of my last name and scioly.
 
 I spent the summer of 2023 hand-scrapping state websites, looking at each state's state competition from the past seven years. If a state had data for their state competition for the past seven years and a school within that state had qualified for the state competition 5/7 times, they would be qualified to be ranked. 
 
