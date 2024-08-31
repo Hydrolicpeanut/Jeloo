@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leaderboard (Updated 2023)</title>
+    <style>
+        body {
+            font-family: monospace;
+            color: white;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background-size: 400% 400%;
+            animation: gradientAnimation 10s ease infinite;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        h1 {
+            font-family: monospace;
+            font-size: 2.5em;
+            margin-top: 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        nav {
+            text-align: center;
+            margin: 20px 0;
+            position: relative;
+        }
+
+        nav a {
+            color: #00bcd4;
+            text-decoration: none;
+            font-size: 1.2em;
+            margin: 0 15px;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        nav a:hover {
+            color: #03a9f4;
+            position: relative;
+        }
+
+        .leaderboard-container {
+            width: 80%;
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .search-bar {
+            margin-bottom: 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        .search-bar input {
+            padding: 10px;
+            width: 80%;
+            max-width: 400px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            font-size: 1em;
+            position: relative;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #1a4357;
+            color: white;
+        }
+        p {
+            text-align: center;
+            line-height: 100px;
+
+        }
+        .leaderboard-container {
+            width: 80%;
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            position: relative; 
+            z-index: 1;
+        }
+
+        .ranking-method {
+            font-size: 1.2em;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        .cursor-follow-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            background: linear-gradient(135deg, #003973, #E5E5BE);
+            background-size: 200% 200%;
+            transition: background-position 0.1s;
+        }
+    </style>
+</head>
+<body>
+    <div class="cursor-follow-bg"></div>
+
+    <h1>Leaderboard (Updated 2023)</h1>
+    <nav>
+        <a href="index.html">Jeloo Homepage</a>
+        <a href="statistics.html">Statistics</a>
+    </nav>
+    <div class="leaderboard-container">
+        <p class="ranking-method">Here is a conclusive list of all the teams that meet the criteria: participated in 5/7 state tournaments in the last seven years, had public data for the 5/7 state tournaments in the previous seven years, and had data on their state's 2023 state tournament. So if a school didn't participate in the last 5/7 state tournaments in the last 7 years, their state didn't have 5/7 state tournaments publicly available in Duosium or the Scioly wiki or didn't have their state's 2023  state tournament available. The states that didn't meet the following criteria were Alabama, Arkansas, the District of Columbia, Iowa, Maine, Mississippi, Nebraska, New Hampshire, North Dakota, Oregon, South Carolina, Vermont, West Virginia, and Wyoming. Please go to the contact tab and let me know if you have the data for these. This means that secondary teams will not be on this ranking because some states do not allow them to come to their state's tournaments.</p>
+        </div>
+    
+    <div class="leaderboard-container">
+        <div class="search-bar">
+            <input type="text" id="searchInput" onkeyup="searchLeaderboard()" placeholder="Search for teams...">
+        </div>
+        
+        <table id="leaderboardTable">
+            <thead>
+                <tr>
+                    <th>School</th>
+                    <th>Elo</th>
+                    <th>State</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>Troy High School</td><td>2299</td><td>So Cal</td></tr>
+                <tr><td>Solon High School</td><td>2291</td><td>OH</td></tr>
+                <tr><td>Adlai E. Stevenson High School</td><td>2282</td><td>IL</td></tr>
+                <tr><td>Mason High School</td><td>2236</td><td>OH</td></tr>
+                <tr><td>Harriton High School</td><td>2196</td><td>PA</td></tr>
+                <tr><td>Acton-Boxborough Regional High School</td><td>2153</td><td>MA</td></tr>
+                <tr><td>Seven Lakes High School</td><td>2139</td><td>TX</td></tr>
+                <tr><td>New Trier High School</td><td>2135</td><td>IL</td></tr>
+                <tr><td>West Windsor-Plainsboro High School South</td><td>2095</td><td>NJ</td></tr>
+                <tr><td>William G. Enloe High School</td><td>2059</td><td>NC</td></tr>
+                <tr><td>Lower Merion High School</td><td>2033</td><td>PA</td></tr>
+                <tr><td>Northville High School</td><td>2030</td><td>MI</td></tr>
+                <tr><td>Pioneer High School</td><td>2003</td><td>MI</td></tr>
+                <tr><td>Ladue Horton Watkins High School</td><td>1974</td><td>MO</td></tr>
+                <tr><td>Liberal Arts and Science Academy</td><td>1942</td><td>TX</td></tr>
+                <tr><td>Mira Loma High School</td><td>1936</td><td>Nor Cal</td></tr>
+                <tr><td>Thomas Jefferson High School for Science and Technology</td><td>1852</td><td>VA</td></tr>
+                <tr><td>Carmel High School</td><td>1922</td><td>IN</td></tr>
+                <tr><td>Ed W. Clark High School</td><td>1914</td><td>NV</td></tr>
+                <tr><td>Brookwood High School</td><td>1902</td><td>GA</td></tr>
+                <tr><td>North Carolina School of Science and Mathematics</td><td>1890</td><td>NC</td></tr>
+                <tr><td>Iolani School</td><td>1877</td><td>HI</td></tr>
+                <tr><td>Marquette University High School</td><td>1860</td><td>WI</td></tr>
+                <tr><td>Grand Haven High School</td><td>1858</td><td>MI</td></tr>
+                <tr><td>Ward Melville High School</td><td>1851</td><td>NY</td></tr>
+                <tr><td>Pembroke Hill</td><td>1831</td><td>MO</td></tr>
+                <tr><td>Mounds View High School</td><td>1826</td><td>MN</td></tr>
+                <tr><td>West Windsor-Plainsboro High School North</td><td>1824</td><td>NJ</td></tr>
+                <tr><td>William P. Clements High School</td><td>1813</td><td>TX</td></tr>
+                <tr><td>Centennial High School</td><td>1803</td><td>MD</td></tr>
+                <tr><td>duPont Manual High School</td><td>1785</td><td>KY</td></tr>
+                <tr><td>Camas High School</td><td>1781</td><td>WA</td></tr>
+                <tr><td>Montgomery High School</td><td>1761</td><td>NJ</td></tr>
+                <tr><td>Boca Raton Community High School</td><td>1744</td><td>FL</td></tr>
+                <tr><td>Fossil Ridge High School</td><td>1742</td><td>CO</td></tr>
+                <tr><td>Homeschool Science Colorado</td><td>1710</td><td>CO</td></tr>
+                <tr><td>Charter School of Wilmington</td><td>1698</td><td>DE</td></tr>
+                <tr><td>Archimedean Upper Conservatory</td><td>1696</td><td>FL</td></tr>
+                <tr><td>Castro Valley High School</td><td>1692</td><td>Nor Cal</td></tr>
+                <tr><td>Blue Valley West High School</td><td>1670</td><td>KS</td></tr>
+                <tr><td>Bayard Rustin High School</td><td>1662</td><td>PA</td></tr>
+                <tr><td>Syosset High School</td><td>1655</td><td>NY</td></tr>
+                <tr><td>Great Neck South High School</td><td>1638</td><td>NY</td></tr>
+                <tr><td>F.W. Buchholz High School</td><td>1632</td><td>FL</td></tr>
+                <tr><td>Tesla STEM High School</td><td>1620</td><td>WA</td></tr>
+                <tr><td>Wayzata High School</td><td>1617</td><td>MN</td></tr>
+                <tr><td>Centerville High School</td><td>1607</td><td>OH</td></tr>
+                <tr><td>Madison West High School</td><td>1600</td><td>WI</td></tr>
+                <tr><td>Cumberland Valley High School</td><td>1600</td><td>PA</td></tr>
+                <tr><td>Fayetteville-Manlius High School</td><td>1575</td><td>NY</td></tr>
+                <tr><td>Mountain View High School</td><td>1575</td><td>Nor Cal</td></tr>
+                <tr><td>Barrington High School</td><td>1553</td><td>RI</td></tr>
+                <tr><td>Walton High School</td><td>1525</td><td>GA</td></tr>
+                <tr><td>South Forsyth High School</td><td>1515</td><td>GA</td></tr>
+                <tr><td>Lake Braddock Secondary School</td><td>1499</td><td>VA</td></tr>
+                <tr><td>Palo Alto High School</td><td>1492</td><td>Nor Cal</td></tr>
+                <tr><td>White Station HS</td><td>1486</td><td>TN</td></tr>
+                <tr><td>West High School</td><td>1480</td><td>UT</td></tr>
+                <tr><td>Munster High School</td><td>1447</td><td>IN</td></tr>
+                <tr><td>Eden Prairie High School</td><td>1418</td><td>MN</td></tr>
+                <tr><td>Townsend Harris High School</td><td>1410</td><td>NY</td></tr>
+                <tr><td>Mountain House High School</td><td>1408</td><td>Nor Cal</td></tr>
+                <tr><td>Columbia High School</td><td>1404</td><td>NY</td></tr>
+                <tr><td>University High School</td><td>1403</td><td>AZ</td></tr>
+                <tr><td>Mission San Jose High School</td><td>1403</td><td>Nor Cal</td></tr>
+                <tr><td>Lexington High School</td><td>1401</td><td>MA</td></tr>
+                <tr><td>Baton Rouge Magnet High School</td><td>1398</td><td>LA</td></tr>
+                <tr><td>Langley High School</td><td>1396</td><td>VA</td></tr>
+                <tr><td>Hopkins School</td><td>1396</td><td>CT</td></tr>
+                <tr><td>Bothell High School</td><td>1384</td><td>WA</td></tr>
+                <tr><td>South Windsor High School</td><td>1377</td><td>CT</td></tr>
+                <tr><td>Farmington High School</td><td>1372</td><td>CT</td></tr>
+                <tr><td>Slinger High School</td><td>1361</td><td>WI</td></tr>
+                <tr><td>Mentor High School</td><td>1359</td><td>OH</td></tr>
+                <tr><td>Ravenwood HS</td><td>1354</td><td>TN</td></tr>
+                <tr><td>Naperville North High School</td><td>1331</td><td>IL</td></tr>
+                <tr><td>Staples High School</td><td>1321</td><td>CT</td></tr>
+                <tr><td>Fulton Science Academy</td><td>1313</td><td>GA</td></tr>
+                <tr><td>Raleigh Charter High School</td><td>1308</td><td>NC</td></tr>
+                <tr><td>Albuquerque Academy</td><td>1303</td><td>NM</td></tr>
+                <tr><td>Hamilton High School</td><td>1299</td><td>MT</td></tr>
+                <tr><td>Maple Mountain High School</td><td>1299</td><td>UT</td></tr>
+                <tr><td>Newton South High School</td><td>1275</td><td>MA</td></tr>
+                <tr><td>Hillsborough High School</td><td>1262</td><td>NJ</td></tr>
+                <tr><td>Collierville HS</td><td>1258</td><td>TN</td></tr>
+                <tr><td>Russell High School</td><td>1255</td><td>KY</td></tr>
+                <tr><td>Catalina Foothills High School</td><td>1254</td><td>AZ</td></tr>
+                <tr><td>St. Martin's Episcopal</td><td>1253</td><td>LA</td></tr>
+                <tr><td>James S. Rickards High School</td><td>1253</td><td>FL</td></tr>
+                <tr><td>Troy High School</td><td>1251</td><td>MI</td></tr>
+                <tr><td>La Cueva High School</td><td>1249</td><td>NM</td></tr>
+                <tr><td>Olathe North High School</td><td>1248</td><td>KS</td></tr>
+                <tr><td>Chattanooga School for the Arts and Sciences</td><td>1246</td><td>TN</td></tr>
+                <tr><td>Fairfax High School</td><td>1244</td><td>VA</td></tr>
+                <tr><td>Pearl City High School</td><td>1243</td><td>HI</td></tr>
+                <tr><td>Obra D. Tompkins High School</td><td>1217</td><td>TX</td></tr>
+                <tr><td>Helena High School</td><td>1213</td><td>MT</td></tr>
+                <tr><td>Lindbergh HS</td><td>1205</td><td>MO</td></tr>
+                <tr><td>American High School</td><td>1200</td><td>Nor Cal</td></tr>
+                <tr><td>Farragut HS</td><td>1200</td><td>TN</td></tr>
+                <tr><td>Medford Area Senior High School</td><td>1199</td><td>WI</td></tr>
+                <tr><td>University of Chicago Laboratory Schools High School</td><td>1193</td><td>IL</td></tr>
+                <tr><td>Menomonie High School</td><td>1183</td><td>WI</td></tr>
+                <tr><td>Beachwood High School</td><td>1181</td><td>OH</td></tr>
+                <tr><td>Winchester High School</td><td>1181</td><td>MA</td></tr>
+                <tr><td>South Brunswick High School</td><td>1167</td><td>NJ</td></tr>
+                <tr><td>John P. Stevens High School</td><td>1166</td><td>NJ</td></tr>
+                <tr><td>Canyon Crest Academy</td><td>1166</td><td>So Cal</td></tr>
+                <tr><td>Rock Bridge High School</td><td>1164</td><td>MO</td></tr>
+                <tr><td>New Albany HS</td><td>1162</td><td>OH</td></tr>
+                <tr><td>Lake Central High School</td><td>1157</td><td>IN</td></tr>
+                <tr><td>Albany High School</td><td>1155</td><td>Nor Cal</td></tr>
+                <tr><td>Belmont High School</td><td>1155</td><td>MA</td></tr>
+                <tr><td>Chattahoochee High School</td><td>1150</td><td>GA</td></tr>
+                <tr><td>International Academy Central</td><td>1148</td><td>MI</td></tr>
+                <tr><td>Newton North High School</td><td>1147</td><td>MA</td></tr>
+                <tr><td>Tokay High School</td><td>1142</td><td>Nor Cal</td></tr>
+                <tr><td>Wellesley High School</td><td>1139</td><td>MA</td></tr>
+                <tr><td>University High School</td><td>1136</td><td>So Cal</td></tr>
+                <tr><td>Blue Valley North High School</td><td>1136</td><td>KS</td></tr>
+                <tr><td>Saline High School</td><td>1132</td><td>MI</td></tr>
+                <tr><td>Penncrest High School</td><td>1131</td><td>PA</td></tr>
+                <tr><td>North Hollywood High School</td><td>1126</td><td>So Cal</td></tr>
+                <tr><td>Boyceville High School</td><td>1125</td><td>WI</td></tr>
+                <tr><td>Pleasant Grove High School</td><td>1123</td><td>Nor Cal</td></tr>
+                <tr><td>Montgomery Blair High School</td><td>1119</td><td>MD</td></tr>
+                <tr><td>Sheldon High School</td><td>1117</td><td>Nor Cal</td></tr>
+                <tr><td>River Hill High School</td><td>1116</td><td>MD</td></tr>
+                <tr><td>Bloomington High School North</td><td>1113</td><td>IN</td></tr>
+                <tr><td>Neuqua Valley High School</td><td>1111</td><td>IL</td></tr>
+                <tr><td>Hickman High School</td><td>1106</td><td>MO</td></tr>
+                <tr><td>Irvington High School</td><td>1101</td><td>Nor Cal</td></tr>
+                <tr><td>Northwood High School</td><td>1100</td><td>So Cal</td></tr>
+                <tr><td>John Adams High School</td><td>1097</td><td>IN</td></tr>
+                <tr><td>Green Hope High School</td><td>1091</td><td>NC</td></tr>
+                <tr><td>Central HS</td><td>1087</td><td>MO</td></tr>
+                <tr><td>Clovis North High School</td><td>1081</td><td>Nor Cal</td></tr>
+                <tr><td>Portola High School</td><td>1079</td><td>So Cal</td></tr>
+                <tr><td>Mayo High School</td><td>1079</td><td>MN</td></tr>
+                <tr><td>Orlando Science High School</td><td>1079</td><td>FL</td></tr>
+                <tr><td>Austin Area Homeschoolers</td><td>1074</td><td>TX</td></tr>
+                <tr><td>Bloomington High School South</td><td>1074</td><td>IN</td></tr>
+                <tr><td>Davidson Academy</td><td>1071</td><td>NV</td></tr>
+                <tr><td>Warrensburg HS</td><td>1071</td><td>MO</td></tr>
+                <tr><td>Walter Johnson High School</td><td>1065</td><td>MD</td></tr>
+                <tr><td>University High School</td><td>1063</td><td>Nor Cal</td></tr>
+                <tr><td>Glastonbury High School</td><td>1062</td><td>CT</td></tr>
+                <tr><td>Richard Montgomery High School</td><td>1062</td><td>MD</td></tr>
+                <tr><td>Dulles High School</td><td>1059</td><td>TX</td></tr>
+                <tr><td>Cedar Springs HS</td><td>1056</td><td>TN</td></tr>
+                <tr><td>Cab Calloway School of the Arts</td><td>1054</td><td>DE</td></tr>
+                <tr><td>Woodbury High School</td><td>1054</td><td>MN</td></tr>
+                <tr><td>E.O. Smith High School</td><td>1049</td><td>CT</td></tr>
+                <tr><td>Belleville High School</td><td>1048</td><td>WI</td></tr>
+                <tr><td>Manhattan High School</td><td>1041</td><td>KS</td></tr>
+                <tr><td>Westlake High School</td><td>1033</td><td>OH</td></tr>
+                <tr><td>John T. Hoggard High School</td><td>1033</td><td>NC</td></tr>
+                <tr><td>Smithfield High School</td><td>1031</td><td>RI</td></tr>
+                <tr><td>East Brunswick High School</td><td>1029</td><td>NJ</td></tr>
+                <tr><td>Capital High School</td><td>1029</td><td>MT</td></tr>
+                <tr><td>Illinois Mathematics and Science Academy</td><td>1028</td><td>IL</td></tr>
+                <tr><td>Glen A. Wilson High School</td><td>1027</td><td>So Cal</td></tr>
+                <tr><td>Northridge High School</td><td>1024</td><td>IN</td></tr>
+                <tr><td>Brentwood HS</td><td>1018</td><td>TN</td></tr>
+                <tr><td>Montgomery Bell HS</td><td>1017</td><td>TN</td></tr>
+                <tr><td>Socorro High School</td><td>1017</td><td>NM</td></tr>
+                <tr><td>Corvallis High school</td><td>1015</td><td>MT</td></tr>
+                <tr><td>West Michigan Aviation Academy</td><td>1014</td><td>MI</td></tr>
+                <tr><td>Minnetonka High School</td><td>1013</td><td>MN</td></tr>
+                <tr><td>Gwinnett School of Mathematics, Science, and Technology</td><td>1006</td><td>GA</td></tr>
+                <tr><td>Westborough High School</td><td>1004</td><td>MA</td></tr>
+                <tr><td>Conestoga High School</td><td>1003</td><td>PA</td></tr>
+                <tr><td>Albuquerque Area Homeschoolers</td><td>1001</td><td>NM</td></tr>
+                <tr><td>Mililani High School</td><td>1000</td><td>HI</td></tr>
+                <tr><td>Cheyenne Mountain High School</td><td>977</td><td>CO</td></tr>
+                <tr><td>Poolesville HS</td><td>965</td><td>MD</td></tr>
+                <tr><td>Thomas S. Wootton HS</td><td>954</td><td>MD</td></tr>
+                <tr><td>Interlake High School</td><td>947</td><td>WA</td></tr>
+                <tr><td>Marriots Ridge High School</td><td>938</td><td>MD</td></tr>
+                <tr><td>Princeton High School</td><td>933</td><td>NJ</td></tr>
+                <tr><td>Athens High School</td><td>930</td><td>MI</td></tr>
+                <tr><td>Lodi High School</td><td>929</td><td>Nor Cal</td></tr>
+                <tr><td>Eastview High School</td><td>922</td><td>MN</td></tr>
+                <tr><td>The Prairie School</td><td>922</td><td>WI</td></tr>
+                <tr><td>Mount Carmel Academy</td><td>920</td><td>LA</td></tr>
+                <tr><td>Livingston High School</td><td>916</td><td>NJ</td></tr>
+                <tr><td>Whiting High School</td><td>914</td><td>IN</td></tr>
+                <tr><td>Poudre High School</td><td>913</td><td>CO</td></tr>
+                <tr><td>Northview High School</td><td>912</td><td>GA</td></tr>
+                <tr><td>Ridgefield High School</td><td>910</td><td>CT</td></tr>
+                <tr><td>Kingwood High School</td><td>909</td><td>TX</td></tr>
+                <tr><td>Sharon High School</td><td>908</td><td>MA</td></tr>
+                <tr><td>Newark Charter School</td><td>907</td><td>DE</td></tr>
+                <tr><td>Reservoir High School</td><td>905</td><td>MD</td></tr>
+                <tr><td>Cranston High School West</td><td>903</td><td>RI</td></tr>
+                <tr><td>Cypress Falls High School</td><td>902</td><td>TX</td></tr>
+                <tr><td>Marshfield High School</td><td>902</td><td>WI</td></tr>
+                <tr><td>Fergus High School</td><td>901</td><td>MT</td></tr>
+                <tr><td>Cinco Ranch High School</td><td>900</td><td>TX</td></tr>
+                <tr><td>Lovington High School</td><td>900</td><td>NM</td></tr>
+                <tr><td>Advanced Technologies Academy</td><td>900</td><td>NV</td></tr>
+                <tr><td>St. John's School</td><td>895</td><td>TX</td></tr>
+                <tr><td>Springfield Catholic HS</td><td>892</td><td>MO</td></tr>
+                <tr><td>Texas Academy of Mathematics and Science</td><td>891</td><td>TX</td></tr>
+                <tr><td>Millburn High School</td><td>890</td><td>NJ</td></tr>
+                <tr><td>Rock Canyon High School</td><td>889</td><td>CO</td></tr>
+                <tr><td>Middlesex County Academy for Science, Mathematics and Engineering Technologies</td><td>889</td><td>NJ</td></tr>
+                <tr><td>Urbana HS</td><td>888</td><td>MD</td></tr>
+                <tr><td>Fort Collins High School</td><td>888</td><td>CO</td></tr>
+                <tr><td>Ardrey Kell High School</td><td>887</td><td>NC</td></tr>
+                <tr><td>Princeton Day School</td><td>887</td><td>NJ</td></tr>
+                <tr><td>Union County Vocational-Technical Schools</td><td>887</td><td>NJ</td></tr>
+                <tr><td>W.T. Woodson High School</td><td>887</td><td>VA</td></tr>
+                <tr><td>Westminster Schools</td><td>886</td><td>GA</td></tr>
+                <tr><td>Dulaney HS</td><td>886</td><td>MD</td></tr>
+                <tr><td>Taft School</td><td>886</td><td>CT</td></tr>
+                <tr><td>East Greenwich High School</td><td>884</td><td>RI</td></tr>
+                <tr><td>Eudora High School</td><td>884</td><td>KS</td></tr>
+                <tr><td>Chapel Hill High School</td><td>882</td><td>NC</td></tr>
+                <tr><td>Cypress Ranch High School</td><td>881</td><td>TX</td></tr>
+                <tr><td>Weston High School</td><td>881</td><td>MA</td></tr>
+                <tr><td>Lincoln High School</td><td>877</td><td>RI</td></tr>
+                <tr><td>Inglemoor High School</td><td>877</td><td>WA</td></tr>
+                <tr><td>St. James Academy</td><td>876</td><td>KS</td></tr>
+                <tr><td>Raisbeck Aviation High School</td><td>876</td><td>WA</td></tr>
+                <tr><td>Gunnison High School</td><td>875</td><td>CO</td></tr>
+                <tr><td>Cherry Hill High School East</td><td>873</td><td>NJ</td></tr>
+                <tr><td>Hillcrest High School Varsity</td><td>872</td><td>UT</td></tr>
+                <tr><td>Northview High School</td><td>870</td><td>OH</td></tr>
+                <tr><td>Atholton High School</td><td>870</td><td>MD</td></tr>
+                <tr><td>Steamboat Springs High School</td><td>870</td><td>CO</td></tr>
+                <tr><td>Hendrickson High School</td><td>870</td><td>TX</td></tr>
+                <tr><td>Mt. Hebron HS</td><td>869</td><td>MD</td></tr>
+                <tr><td>Modesto High School</td><td>868</td><td>Nor Cal</td></tr>
+                <tr><td>Mercer Island High School</td><td>866</td><td>WA</td></tr>
+                <tr><td>Green Valley High School</td><td>865</td><td>NV</td></tr>
+                <tr><td>Hudson High School</td><td>865</td><td>OH</td></tr>
+                <tr><td>Mill Valley High School</td><td>863</td><td>KS</td></tr>
+                <tr><td>Sehome High School</td><td>863</td><td>WA</td></tr>
+                <tr><td>Blacksburg High School</td><td>863</td><td>VA</td></tr>
+                <tr><td>Johns Creek High School</td><td>863</td><td>GA</td></tr>
+                <tr><td>Lamar Academy</td><td>862</td><td>TX</td></tr>
+                <tr><td>Langham Creek High School</td><td>862</td><td>TX</td></tr>
+                <tr><td>Bergen County Academies</td><td>861</td><td>NJ</td></tr>
+                <tr><td>Classical High School</td><td>860</td><td>RI</td></tr>
+                <tr><td>Wausau West High School</td><td>860</td><td>WI</td></tr>
+                <tr><td>Martin Luther King Junior Magnet High School</td><td>859</td><td>TN</td></tr>
+                <tr><td>Rocky Mountain High School</td><td>859</td><td>CO</td></tr>
+                <tr><td>Cherry Creek High School</td><td>858</td><td>CO</td></tr>
+                <tr><td>William Penn High School</td><td>858</td><td>DE</td></tr>
+                <tr><td>Lawrence High School</td><td>858</td><td>NJ</td></tr>
+                <tr><td>Chantilly High School</td><td>857</td><td>VA</td></tr>
+                <tr><td>Tri-Cities Prep Catholic High School</td><td>857</td><td>WA</td></tr>
+                <tr><td>Baltimore Polytechnic Institute</td><td>857</td><td>MD</td></tr>
+                <tr><td>Widefield High School</td><td>856</td><td>CO</td></tr>
+                <tr><td>Valparaiso High School</td><td>855</td><td>IN</td></tr>
+                <tr><td>Oakland Mills HS</td><td>854</td><td>MD</td></tr>
+                <tr><td>Stuyvesant High School</td><td>853</td><td>NY</td></tr>
+                <tr><td>Olympia High School</td><td>852</td><td>FL</td></tr>
+                <tr><td>Westwood High School</td><td>852</td><td>MA</td></tr>
+                <tr><td>Evergreen High School</td><td>852</td><td>CO</td></tr>
+                <tr><td>Sylvania Southview High School</td><td>850</td><td>OH</td></tr>
+                <tr><td>Kickapoo HS</td><td>849</td><td>MO</td></tr>
+                <tr><td>East Chapel Hill High School</td><td>848</td><td>NC</td></tr>
+                <tr><td>St. Edward High School</td><td>848</td><td>OH</td></tr>
+                <tr><td>Curtis Senior High School</td><td>848</td><td>WA</td></tr>
+                <tr><td>Mayfield High School</td><td>848</td><td>OH</td></tr>
+                <tr><td>Naperville Central High School</td><td>848</td><td>IL</td></tr>
+                <tr><td>Montville Township High School</td><td>847</td><td>NJ</td></tr>
+                <tr><td>Oakton High School</td><td>846</td><td>VA</td></tr>
+                <tr><td>Panther Creek High School</td><td>846</td><td>NC</td></tr>
+                <tr><td>North Providence High School</td><td>845</td><td>RI</td></tr>
+                <tr><td>Waubonsie Valley High School</td><td>845</td><td>IL</td></tr>
+                <tr><td>Franklin HS</td><td>844</td><td>MD</td></tr>
+                <tr><td>Oak Park</td><td>844</td><td>MO</td></tr>
+                <tr><td>McLean High School</td><td>843</td><td>VA</td></tr>
+                <tr><td>Staten Island Technical High School</td><td>843</td><td>NY</td></tr>
+                <tr><td>Tenafly High School</td><td>841</td><td>NJ</td></tr>
+                <tr><td>Century High School</td><td>841</td><td>MN</td></tr>
+                <tr><td>Allendale High School</td><td>841</td><td>MI</td></tr>
+                <tr><td>Centreville High School</td><td>841</td><td>VA</td></tr>
+                <tr><td>Pilgrim High School</td><td>840</td><td>RI</td></tr>
+                <tr><td>James M. Bennett HS</td><td>840</td><td>MD</td></tr>
+                <tr><td>James Madison High School</td><td>839</td><td>VA</td></tr>
+                <tr><td>Moses Brown School</td><td>839</td><td>RI</td></tr>
+                <tr><td>Stone Bridge High School</td><td>838</td><td>VA</td></tr>
+                <tr><td>La Salle Academy</td><td>838</td><td>RI</td></tr>
+                <tr><td>Coronado High School</td><td>838</td><td>NV</td></tr>
+                <tr><td>James W. Robinson Jr. Secondary School</td><td>836</td><td>VA</td></tr>
+                <tr><td>Alpharetta High School</td><td>835</td><td>GA</td></tr>
+                <tr><td>Isaac Bear Early College High School</td><td>835</td><td>NC</td></tr>
+                <tr><td>South County High School</td><td>834</td><td>VA</td></tr>
+                <tr><td>Alamo Heights High School</td><td>834</td><td>TX</td></tr>
+                <tr><td>Potomac Falls High School</td><td>834</td><td>VA</td></tr>
+                <tr><td>West Springfield High School</td><td>833</td><td>VA</td></tr>
+                <tr><td>Westfield High School</td><td>833</td><td>NJ</td></tr>
+                <tr><td>Central Valley High School</td><td>832</td><td>WA</td></tr>
+                <tr><td>Clear Lake High School</td><td>831</td><td>TX</td></tr>
+                <tr><td>Franklin High School</td><td>830</td><td>Nor Cal</td></tr>
+                <tr><td>Spring Early College Academy</td><td>830</td><td>TX</td></tr>
+                <tr><td>Spruce Creek High School</td><td>830</td><td>FL</td></tr>
+                <tr><td>Cranston High School East</td><td>829</td><td>RI</td></tr>
+                <tr><td>Cambridge High School</td><td>828</td><td>WI</td></tr>
+                <tr><td>North Pocono High School</td><td>828</td><td>PA</td></tr>
+                <tr><td>West Career and Technical Academy</td><td>828</td><td>NV</td></tr>
+                <tr><td>George C. Marshall High School</td><td>826</td><td>VA</td></tr>
+                <tr><td>Archmere Academy</td><td>826</td><td>DE</td></tr>
+                <tr><td>Reading Memorial High School</td><td>826</td><td>MA</td></tr>
+                <tr><td>Arcadia High School</td><td>826</td><td>So Cal</td></tr>
+                <tr><td>Detroit Country Day Upper School</td><td>825</td><td>MI</td></tr>
+                <tr><td>Foothill High School</td><td>825</td><td>NV</td></tr>
+                <tr><td>Las Cruces High School</td><td>825</td><td>NM</td></tr>
+                <tr><td>Cambridge Rindge and Latin School</td><td>822</td><td>MA</td></tr>
+                <tr><td>East Ridge High School</td><td>822</td><td>MN</td></tr>
+                <tr><td>State College Area High School</td><td>822</td><td>PA</td></tr>
+                <tr><td>Westfield High School</td><td>821</td><td>VA</td></tr>
+                <tr><td>Northgate High School</td><td>820</td><td>GA</td></tr>
+                <tr><td>Dobyns-Bennett HS</td><td>820</td><td>TN</td></tr>
+                <tr><td>East Lansing High School</td><td>819</td><td>MI</td></tr>
+                <tr><td>Chaminade High School</td><td>819</td><td>NY</td></tr>
+                <tr><td>Algonquin Regional High School</td><td>819</td><td>MA</td></tr>
+                <tr><td>Canton High School</td><td>817</td><td>MI</td></tr>
+                <tr><td>Jericho High School</td><td>816</td><td>NY</td></tr>
+                <tr><td>Northmont High School</td><td>815</td><td>OH</td></tr>
+                <tr><td>Diamond Bar High School</td><td>815</td><td>So Cal</td></tr>
+                <tr><td>Bellville High School</td><td>814</td><td>TX</td></tr>
+                <tr><td>Centennial High School</td><td>814</td><td>NM</td></tr>
+                <tr><td>Bell County High School</td><td>812</td><td>KY</td></tr>
+                <tr><td>Hinsdale Central High School</td><td>811</td><td>IL</td></tr>
+                <tr><td>Cottonwood Classical Preparatory School</td><td>811</td><td>NM</td></tr>
+                <tr><td>Temple City High School</td><td>810</td><td>So Cal</td></tr>
+                <tr><td>Buchanan High School</td><td>810</td><td>Nor Cal</td></tr>
+                <tr><td>Wheeler School</td><td>808</td><td>RI</td></tr>
+                <tr><td>Florida Atlantic University High School</td><td>808</td><td>FL</td></tr>
+                <tr><td>Del Norte High School</td><td>808</td><td>So Cal</td></tr>
+                <tr><td>Westview High School</td><td>808</td><td>So Cal</td></tr>
+                <tr><td>Okemos High School</td><td>807</td><td>MI</td></tr>
+                <tr><td>Portsmouth High School</td><td>804</td><td>RI</td></tr>
+                <tr><td>Wichita East High School</td><td>804</td><td>KS</td></tr>
+                <tr><td>Stevenson High School</td><td>803</td><td>MI</td></tr>
+                <tr><td>West Lafayette High School</td><td>802</td><td>IN</td></tr>
+                <tr><td>Bartram Trail High School</td><td>802</td><td>FL</td></tr>
+                <tr><td>McClintock</td><td>801</td><td>AZ</td></tr>
+                <tr><td>Grand County School</td><td>801</td><td>UT</td></tr>
+                <tr><td>Empire High School</td><td>801</td><td>AZ</td></tr>
+                <tr><td>Accelerated Learning Laboratory</td><td>801</td><td>AZ</td></tr>
+                <tr><td>Coral Academy of Science - Reno</td><td>800</td><td>NV</td></tr>
+                <tr><td>The Early College at Guilford</td><td>800</td><td>NC</td></tr>
+                <tr><td>Boston Latin School</td><td>800</td><td>MA</td></tr>
+                <tr><td>Eisenhower High School</td><td>799</td><td>MI</td></tr>
+                <tr><td>Springfield High School</td><td>798</td><td>OH</td></tr>
+                <tr><td>Riverton High School</td><td>797</td><td>UT</td></tr>
+                <tr><td>Mount Academy</td><td>796</td><td>NY</td></tr>
+                <tr><td>Westford Academy</td><td>796</td><td>MA</td></tr>
+                <tr><td>Holt High School</td><td>795</td><td>MI</td></tr>
+                <tr><td>Ballard High School</td><td>795</td><td>KY</td></tr>
+                <tr><td>Medway High School</td><td>794</td><td>MA</td></tr>
+                <tr><td>Hamilton High School</td><td>793</td><td>AZ</td></tr>
+                <tr><td>Utah County Academy of Sciences</td><td>793</td><td>UT</td></tr>
+                <tr><td>Forsyth Central High School</td><td>793</td><td>GA</td></tr>
+                <tr><td>Tonganoxie High School</td><td>792</td><td>KS</td></tr>
+                <tr><td>Joseph A. Foran High School</td><td>792</td><td>CT</td></tr>
+                <tr><td>Northeast Nodaway HS</td><td>792</td><td>MO</td></tr>
+                <tr><td>Cincinnati Country Day School</td><td>791</td><td>OH</td></tr>
+                <tr><td>Simon G. Atkins Academic and Technology High School</td><td>790</td><td>NC</td></tr>
+                <tr><td>Forest Hills Central High School</td><td>790</td><td>MI</td></tr>
+                <tr><td>Woodward Academy</td><td>790</td><td>GA</td></tr>
+                <tr><td>Arlington High School</td><td>789</td><td>MA</td></tr>
+                <tr><td>Hotchkiss School</td><td>787</td><td>CT</td></tr>
+                <tr><td>Chelmsford High School</td><td>787</td><td>MA</td></tr>
+                <tr><td>Beloit Turner High School</td><td>787</td><td>WI</td></tr>
+                <tr><td>Uxbridge High School</td><td>787</td><td>MA</td></tr>
+                <tr><td>DeLand High School</td><td>787</td><td>FL</td></tr>
+                <tr><td>Chardon High School</td><td>786</td><td>OH</td></tr>
+                <tr><td>Clovis West High School</td><td>786</td><td>Nor Cal</td></tr>
+                <tr><td>Olentangy Orange High School</td><td>786</td><td>OH</td></tr>
+                <tr><td>Jonathan Law High School</td><td>785</td><td>CT</td></tr>
+                <tr><td>Chesterton High School</td><td>785</td><td>IN</td></tr>
+                <tr><td>Boston University Academy</td><td>785</td><td>MA</td></tr>
+                <tr><td>Saint Ignatius High School</td><td>784</td><td>OH</td></tr>
+                <tr><td>Uintah High School</td><td>784</td><td>UT</td></tr>
+                <tr><td>Salem High School</td><td>783</td><td>MI</td></tr>
+                <tr><td>Eagan High School</td><td>783</td><td>MN</td></tr>
+                <tr><td>Concord High School</td><td>783</td><td>DE</td></tr>
+                <tr><td>Greenwood Lab High School</td><td>781</td><td>MO</td></tr>
+                <tr><td>Central Magnet</td><td>781</td><td>TN</td></tr>
+                <tr><td>Bedford High School</td><td>779</td><td>MA</td></tr>
+                <tr><td>Sidney High School</td><td>779</td><td>MT</td></tr>
+                <tr><td>Millennium High School</td><td>777</td><td>AZ</td></tr>
+                <tr><td>Medina HS</td><td>777</td><td>OH</td></tr>
+                <tr><td>Saguaro High School</td><td>776</td><td>AZ</td></tr>
+                <tr><td>Shady Side Academy Senior School</td><td>775</td><td>PA</td></tr>
+                <tr><td>Olathe Northwest High School</td><td>774</td><td>KS</td></tr>
+                <tr><td>Kentucky Country Day School</td><td>774</td><td>KY</td></tr>
+                <tr><td>Madison Central High School</td><td>773</td><td>KY</td></tr>
+                <tr><td>St. Xavier High School</td><td>773</td><td>OH</td></tr>
+                <tr><td>Mount Saint Charles Academy</td><td>773</td><td>RI</td></tr>
+                <tr><td>Littleton High School</td><td>772</td><td>MA</td></tr>
+                <tr><td>Macon HS</td><td>771</td><td>MO</td></tr>
+                <tr><td>Chariho High School</td><td>771</td><td>RI</td></tr>
+                <tr><td>Lawrence Free State High School</td><td>770</td><td>KS</td></tr>
+                <tr><td>West High School</td><td>770</td><td>TN</td></tr>
+                <tr><td>Central Falls High School</td><td>770</td><td>RI</td></tr>
+                <tr><td>Half Hollow Hills High School East</td><td>770</td><td>NY</td></tr>
+                <tr><td>San Marino High School</td><td>770</td><td>So Cal</td></tr>
+                <tr><td>Morgan High</td><td>770</td><td>UT</td></tr>
+                <tr><td>De Soto High School</td><td>770</td><td>KS</td></tr>
+                <tr><td>East Noble High School</td><td>770</td><td>IN</td></tr>
+                <tr><td>Brookfield Central High School</td><td>770</td><td>WI</td></tr>
+                <tr><td>Marshall High School</td><td>769</td><td>WI</td></tr>
+                <tr><td>Loveland High School</td><td>769</td><td>OH</td></tr>
+                <tr><td>Land O Lakes High School</td><td>768</td><td>FL</td></tr>
+                <tr><td>Lincoln-Sudbury Regional High School</td><td>766</td><td>MA</td></tr>
+                <tr><td>Archbishop Hoban High School</td><td>765</td><td>OH</td></tr>
+                <tr><td>Snow Canyon High School</td><td>765</td><td>UT</td></tr>
+                <tr><td>Allen County-Scottsville High School</td><td>764</td><td>KY</td></tr>
+                <tr><td>Manchester High School</td><td>764</td><td>IN</td></tr>
+                <tr><td>Garnet Valley High School</td><td>764</td><td>PA</td></tr>
+                <tr><td>Goodland High School</td><td>762</td><td>KS</td></tr>
+                <tr><td>Hershey High School</td><td>761</td><td>PA</td></tr>
+                <tr><td>South High Community School</td><td>761</td><td>MA</td></tr>
+                <tr><td>Maize South High School</td><td>760</td><td>KS</td></tr>
+                <tr><td>American Fork High School</td><td>760</td><td>UT</td></tr>
+                <tr><td>Lakeland Union High School</td><td>760</td><td>WI</td></tr>
+                <tr><td>Weston High School</td><td>759</td><td>CT</td></tr>
+                <tr><td>Brooklyn Technical High School</td><td>758</td><td>NY</td></tr>
+                <tr><td>Columbus Academy</td><td>757</td><td>OH</td></tr>
+                <tr><td>Cloudcroft High School</td><td>756</td><td>NM</td></tr>
+                <tr><td>Durham Academy Upper School</td><td>755</td><td>NC</td></tr>
+                <tr><td>Northwestern Lehigh High School</td><td>755</td><td>PA</td></tr>
+                <tr><td>Hamilton High School</td><td>755</td><td>MI</td></tr>
+                <tr><td>Metea Valley High School</td><td>755</td><td>IL</td></tr>
+                <tr><td>Hume HS</td><td>754</td><td>MO</td></tr>
+                <tr><td>Lane Tech College Prep Academic Center</td><td>753</td><td>IL</td></tr>
+                <tr><td>Concord Schools of Science</td><td>752</td><td>DE</td></tr>
+                <tr><td>Hobbs High School</td><td>752</td><td>NM</td></tr>
+                <tr><td>Trinity Academy</td><td>752</td><td>KS</td></tr>
+                <tr><td>Lyons Township High School</td><td>752</td><td>IL</td></tr>
+                <tr><td>University Preparatory High School</td><td>751</td><td>Nor Cal</td></tr>
+                <tr><td>Lafayette County HS</td><td>750</td><td>MO</td></tr>
+                <tr><td>Williamsville East High School</td><td>750</td><td>NY</td></tr>
+                <tr><td>Denmark High School</td><td>750</td><td>WI</td></tr>
+                <tr><td>Casteel High School</td><td>750</td><td>AZ</td></tr>
+                <tr><td>Plymouth High School</td><td>748</td><td>MI</td></tr>
+                <tr><td>Whitney Young High School</td><td>748</td><td>IL</td></tr>
+                <tr><td>Walter Payton College Prep High School</td><td>747</td><td>IL</td></tr>
+                <tr><td>St. Paul Academy & Summit School</td><td>746</td><td>MN</td></tr>
+                <tr><td>Marvin Ridge High School</td><td>746</td><td>NC</td></tr>
+                <tr><td>Avon High School</td><td>746</td><td>IN</td></tr>
+                <tr><td>North Penn High School</td><td>746</td><td>PA</td></tr>
+                <tr><td>Torrey Pines High School</td><td>745</td><td>So Cal</td></tr>
+                <tr><td>Wayland High School</td><td>745</td><td>MA</td></tr>
+                <tr><td>Andover High School</td><td>744</td><td>MA</td></tr>
+                <tr><td>Oliver Ames High School</td><td>743</td><td>MA</td></tr>
+                <tr><td>Platteville High School</td><td>742</td><td>WI</td></tr>
+                <tr><td>Augusta High School</td><td>741</td><td>KS</td></tr>
+                <tr><td>V. Sue Cleveland High School</td><td>740</td><td>NM</td></tr>
+                <tr><td>Andover Central High School</td><td>740</td><td>KS</td></tr>
+                <tr><td>Silver High School</td><td>739</td><td>NM</td></tr>
+                <tr><td>Tower Hill School</td><td>739</td><td>DE</td></tr>
+                <tr><td>Mt. Vernon High School</td><td>739</td><td>IN</td></tr>
+                <tr><td>Knox Central High School</td><td>739</td><td>KY</td></tr>
+                <tr><td>Stroudsburg High School</td><td>738</td><td>PA</td></tr>
+                <tr><td>East Prairie HS</td><td>738</td><td>MO</td></tr>
+                <tr><td>Milford High School</td><td>736</td><td>MA</td></tr>
+                <tr><td>Orange County School of the Arts</td><td>736</td><td>So Cal</td></tr>
+                <tr><td>Medfield High School</td><td>736</td><td>MA</td></tr>
+                <tr><td>Payson High School</td><td>735</td><td>UT</td></tr>
+                <tr><td>Desert Hills High School</td><td>734</td><td>UT</td></tr>
+                <tr><td>Longmeadow High School</td><td>734</td><td>MA</td></tr>
+                <tr><td>Parkland High School</td><td>734</td><td>PA</td></tr>
+                <tr><td>University Laboratory High School</td><td>733</td><td>IL</td></tr>
+                <tr><td>Tulare Union High School</td><td>733</td><td>Nor Cal</td></tr>
+                <tr><td>Hopkinton High School</td><td>732</td><td>MA</td></tr>
+                <tr><td>Baldwin-Woodville High School</td><td>730</td><td>WI</td></tr>
+                <tr><td>Sheboygan North High School</td><td>730</td><td>WI</td></tr>
+                <tr><td>Moorhead High School</td><td>729</td><td>MN</td></tr>
+                <tr><td>North Central High School</td><td>729</td><td>IN</td></tr>
+                <tr><td>Shell Lake High School</td><td>729</td><td>WI</td></tr>
+                <tr><td>Foxborough High School</td><td>729</td><td>MA</td></tr>
+                <tr><td>Abington Heights High School</td><td>729</td><td>PA</td></tr>
+                <tr><td>Evansville High School</td><td>728</td><td>WI</td></tr>
+                <tr><td>Conard High School</td><td>728</td><td>CT</td></tr>
+                <tr><td>Hawley High School</td><td>728</td><td>MN</td></tr>
+                <tr><td>South Harrison High School</td><td>727</td><td>MO</td></tr>
+                <tr><td>Blake High School</td><td>727</td><td>MN</td></tr>
+                <tr><td>Fishers High School</td><td>726</td><td>IN</td></tr>
+                <tr><td>Orono High School</td><td>723</td><td>MN</td></tr>
+                <tr><td>Exeter High School</td><td>723</td><td>Nor Cal</td></tr>
+                <tr><td>Farmington High School</td><td>722</td><td>MN</td></tr>
+                <tr><td>Northside College Prep</td><td>722</td><td>IL</td></tr>
+                <tr><td>Brighton High School</td><td>720</td><td>NY</td></tr>
+                <tr><td>Emsley A. Laney High School</td><td>719</td><td>NC</td></tr>
+                <tr><td>Harlem High School</td><td>718</td><td>IL</td></tr>
+                <tr><td>Crown Point High School</td><td>717</td><td>IN</td></tr>
+                <tr><td>Brighton High School</td><td>716</td><td>MI</td></tr>
+                <tr><td>Riley High School</td><td>716</td><td>IN</td></tr>
+                <tr><td>Cheshire Academy</td><td>715</td><td>CT</td></tr>
+                <tr><td>Mystic Valley Regional Charter School</td><td>715</td><td>MA</td></tr>
+                <tr><td>Spring Lake Park High School</td><td>715</td><td>MN</td></tr>
+                <tr><td>Hatch Valley High School</td><td>715</td><td>NM</td></tr>
+                <tr><td>Rancho Bernardo High School</td><td>714</td><td>So Cal</td></tr>
+                <tr><td>Walpole High School</td><td>714</td><td>MA</td></tr>
+                <tr><td>Amity Regional High School</td><td>713</td><td>CT</td></tr>
+                <tr><td>Brookline High School</td><td>713</td><td>MA</td></tr>
+                <tr><td>Calumet High School</td><td>713</td><td>MI</td></tr>
+                <tr><td>Palco Sr. High School</td><td>712</td><td>KS</td></tr>
+                <tr><td>Auburn High School</td><td>712</td><td>MA</td></tr>
+                <tr><td>Spackenkill High School</td><td>712</td><td>NY</td></tr>
+                <tr><td>John Jay High School</td><td>710</td><td>NY</td></tr>
+                <tr><td>Crystal Lake Central High School</td><td>710</td><td>IL</td></tr>
+                <tr><td>Appoquinimink High School</td><td>708</td><td>DE</td></tr>
+                <tr><td>Pittsford Sutherland High School</td><td>708</td><td>NY</td></tr>
+                <tr><td>San Juan College High School</td><td>706</td><td>NM</td></tr>
+                <tr><td>City Academy</td><td>705</td><td>UT</td></tr>
+                <tr><td>New Richmond High School</td><td>704</td><td>WI</td></tr>
+                <tr><td>Elizabethtown Area High School</td><td>704</td><td>PA</td></tr>
+                <tr><td>Middletown High School</td><td>702</td><td>DE</td></tr>
+                <tr><td>Glenbrook South High School</td><td>702</td><td>IL</td></tr>
+                <tr><td>Waterford High School</td><td>700</td><td>CT</td></tr>
+                <tr><td>Kenston High School</td><td>700</td><td>OH</td></tr>
+                <tr><td>Engineering and Science University Magnet School</td><td>700</td><td>CT</td></tr>
+                <tr><td>Mallard Creek High School</td><td>698</td><td>NC</td></tr>
+                <tr><td>St. Joseph's Collegiate Institute</td><td>698</td><td>NY</td></tr>
+                <tr><td>Lowell High School</td><td>698</td><td>MA</td></tr>
+                <tr><td>Manistee High School</td><td>697</td><td>MI</td></tr>
+                <tr><td>Austin High School</td><td>697</td><td>MN</td></tr>
+                <tr><td>Alpena High School</td><td>697</td><td>MI</td></tr>
+                <tr><td>Kutztown Area High School</td><td>696</td><td>PA</td></tr>
+                <tr><td>Manheim Central High School</td><td>695</td><td>PA</td></tr>
+                <tr><td>McPherson High School</td><td>694</td><td>KS</td></tr>
+                <tr><td>St. Joseph High School</td><td>694</td><td>MI</td></tr>
+                <tr><td>West High School</td><td>694</td><td>So Cal</td></tr>
+                <tr><td>Roslyn High School</td><td>692</td><td>NY</td></tr>
+                <tr><td>Vail Academy</td><td>691</td><td>AZ</td></tr>
+                <tr><td>Plattsburgh High School</td><td>691</td><td>NY</td></tr>
+                <tr><td>Hobbs Freshman School</td><td>691</td><td>NM</td></tr>
+                <tr><td>Woodstock Academy</td><td>690</td><td>CT</td></tr>
+                <tr><td>John Marshall High School</td><td>689</td><td>MN</td></tr>
+                <tr><td>Huntley High School</td><td>687</td><td>IL</td></tr>
+                <tr><td>Walnut High School</td><td>687</td><td>So Cal</td></tr>
+                <tr><td>Fairbault High School</td><td>687</td><td>MN</td></tr>
+                <tr><td>West Henderson High School</td><td>686</td><td>NC</td></tr>
+                <tr><td>Franklin Regional Senior High School</td><td>686</td><td>PA</td></tr>
+                <tr><td>Division Avenue High School</td><td>684</td><td>NY</td></tr>
+                <tr><td>Norwin High School</td><td>684</td><td>PA</td></tr>
+                <tr><td>Elk Mound High School</td><td>683</td><td>WI</td></tr>
+                <tr><td>Hicksville High School</td><td>683</td><td>NY</td></tr>
+                <tr><td>Jamesville-Dewitt High School</td><td>683</td><td>NY</td></tr>
+                <tr><td>Waseca High School</td><td>682</td><td>MN</td></tr>
+                <tr><td>Great Oak High School</td><td>681</td><td>So Cal</td></tr>
+                <tr><td>James B. Conant High School</td><td>681</td><td>IL</td></tr>
+                <tr><td>Mattawan High School</td><td>681</td><td>MI</td></tr>
+                <tr><td>Rockford Christian High School</td><td>681</td><td>IL</td></tr>
+                <tr><td>Quaker Valley High School</td><td>680</td><td>PA</td></tr>
+                <tr><td>Mount Horeb High School</td><td>680</td><td>WI</td></tr>
+                <tr><td>Hunter College High School</td><td>679</td><td>NY</td></tr>
+                <tr><td>The Bronx High School of Science</td><td>679</td><td>NY</td></tr>
+                <tr><td>Loyola Academy</td><td>677</td><td>IL</td></tr>
+                <tr><td>Middle Creek High School</td><td>677</td><td>NC</td></tr>
+                <tr><td>Wyoming Area Secondary Center</td><td>675</td><td>PA</td></tr>
+                <tr><td>Liberty High School</td><td>675</td><td>IL</td></tr>
+                <tr><td>St. Elizabeth School</td><td>674</td><td>DE</td></tr>
+                <tr><td>Niles West High School</td><td>674</td><td>IL</td></tr>
+                <tr><td>Centennial High School</td><td>673</td><td>IL</td></tr>
+                <tr><td>Cardinal Gibbons High School</td><td>672</td><td>NC</td></tr>
+                <tr><td>Red Land High School</td><td>672</td><td>PA</td></tr>
+                <tr><td>Wallenpaupack Area High School</td><td>669</td><td>PA</td></tr>
+                <tr><td>Bozeman High School</td><td>669</td><td>MT</td></tr>
+                <tr><td>North East High School</td><td>668</td><td>PA</td></tr>
+                <tr><td>Kellenberg Memorial High School</td><td>668</td><td>NY</td></tr>
+                <tr><td>Piedra Vista High School</td><td>668</td><td>NM</td></tr>
+                <tr><td>Bethlehem Central High School</td><td>668</td><td>NY</td></tr>
+                <tr><td>Roundup High School</td><td>667</td><td>MT</td></tr>
+                <tr><td>Sacred Heart High School</td><td>666</td><td>MN</td></tr>
+                <tr><td>Branford High School</td><td>665</td><td>CT</td></tr>
+                <tr><td>Fox Lane High School</td><td>665</td><td>NY</td></tr>
+                <tr><td>Woods Charter School</td><td>663</td><td>NC</td></tr>
+                <tr><td>Waipahu High School</td><td>663</td><td>HI</td></tr>
+                <tr><td>Salesianum School</td><td>662</td><td>DE</td></tr>
+                <tr><td>Scripps Ranch High School</td><td>661</td><td>So Cal</td></tr>
+                <tr><td>Jack Britt High School</td><td>660</td><td>NC</td></tr>
+                <tr><td>D.H. Conley High School</td><td>659</td><td>NC</td></tr>
+                <tr><td>Libby High School</td><td>657</td><td>MT</td></tr>
+                <tr><td>Northside High School (Onslow)</td><td>654</td><td>NC</td></tr>
+                <tr><td>Earl L. Vandermeulen High School</td><td>653</td><td>NY</td></tr>
+                <tr><td>Ardsley High School</td><td>646</td><td>NY</td></tr>
+                <tr><td>Durham School of the Arts</td><td>646</td><td>NC</td></tr>
+                <tr><td>Martin Luther King High School</td><td>644</td><td>So Cal</td></tr>
+                <tr><td>Edwardsville High School</td><td>643</td><td>IL</td></tr>
+                <tr><td>Ithaca High School</td><td>643</td><td>NY</td></tr>
+                <tr><td>Jefferson High School</td><td>642</td><td>MT</td></tr>
+                <tr><td>Scarsdale High School</td><td>641</td><td>NY</td></tr>
+                <tr><td>Joliet High School</td><td>638</td><td>MT</td></tr>
+                <tr><td>Edwardsburg High School</td><td>638</td><td>MI</td></tr>
+                <tr><td>Caravel Academy</td><td>636</td><td>DE</td></tr>
+                <tr><td>Terry Sanford High School</td><td>636</td><td>NC</td></tr>
+                <tr><td>Sussex Technical High School</td><td>630</td><td>DE</td></tr>
+                <tr><td>Williamsville North High School</td><td>624</td><td>NY</td></tr>
+                <tr><td>Riverside STEM High School</td><td>622</td><td>So Cal</td></tr>
+                <tr><td>Sanford School</td><td>622</td><td>DE</td></tr>
+                <tr><td>Cut Bank High School</td><td>621</td><td>MT</td></tr>
+                <tr><td>Delcastle Technical High School</td><td>620</td><td>DE</td></tr>
+                <tr><td>Towle Institute</td><td>615</td><td>DE</td></tr>
+                <tr><td>Vestal High School</td><td>607</td><td>NY</td></tr>
+                <tr><td>Wilmington Christian School</td><td>602</td><td>DE</td></tr>
+                <tr><td>St. Marks High School</td><td>600</td><td>DE</td></tr>
+                <tr><td>Penfield High School</td><td>597</td><td>NY</td></tr>
+                <tr><td>Red Lion Christian Academy</td><td>597</td><td>DE</td></tr>
+                <tr><td>Mount Sophia Academy</td><td>590</td><td>DE</td></tr>
+                <tr><td>Camden High School</td><td>580</td><td>NY</td></tr>
+                <tr><td>Brandywine High School</td><td>580</td><td>DE</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <nav>
+        <a href="index.html">Jeloo Homepage</a>
+        <a href="statistics.html">Statistics</a>
+    </nav>
+
+    <script>
+        function searchLeaderboard() {
+            let input = document.getElementById('searchInput');
+            let filter = input.value.toUpperCase();
+            let table = document.getElementById('leaderboardTable');
+            let tr = table.getElementsByTagName('tr');
+    
+            for (let i = 1; i < tr.length; i++) {
+                let td = tr[i].getElementsByTagName('td')[0];
+                if (td) {
+                    let txtValue = td.textContent || td.innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = '';
+                    } else {
+                        tr[i].style.display = 'none';
+                    }
+                }
+            }
+        }
+        document.addEventListener('mousemove', function(e) {
+            const bg = document.querySelector('.cursor-follow-bg');
+            const x = e.clientX / window.innerWidth * 100;
+            const y = e.clientY / window.innerHeight * 100;
+            bg.style.backgroundPosition = `${x}% ${y}%`;
+        });
+    </script>
+</body>
+</html>

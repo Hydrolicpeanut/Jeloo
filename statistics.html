@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jeloo Statistics</title>
+    <style>
+        body {
+            font-family: monospace;
+            color: white;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            background-size: 400% 400%;
+            animation: gradientAnimation 10s ease infinite;
+            overflow-y: scroll;
+            position: relative;
+            font-size: 1.3em;
+        }
+
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        h1 {
+            font-family: monospace;
+            font-size: 2.5em;
+            margin-bottom: 0.5em;
+            position: relative;
+            text-align: center;
+        }
+
+        nav {
+            margin-top: 1em;
+            text-align: center;
+            position: relative;
+        }
+
+        nav a {
+            color: #00bcd4;
+            text-decoration: none;
+            font-size: 1.2em;
+            margin: 0 15px;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        nav a:hover {
+            color: #03a9f4;
+        }
+
+        .statistics-container {
+            width: 80%;
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .image-container {
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ddd;
+            margin-bottom: 10px;
+        }
+
+        .image-container p {
+            font-size: 1.1em;
+        }
+
+        .cursor-follow-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            background: linear-gradient(135deg, #003973, #E5E5BE);
+            background-size: 200% 200%;
+            transition: background-position 0.1s;
+        }
+    </style>
+</head>
+<body>
+    <div class="cursor-follow-bg"></div>
+
+    <h1>Statistics</h1>
+    <nav>
+        <a href="index.html">Jeloo Homepage</a>
+        <a href="leaderboard.html">Leaderboard</a>
+    </nav>
+    
+    <div class="statistics-container">
+        <div class="image-container">
+            <p>The distribution of Elo rating</p>
+            <img src="Figure_1.png" alt="">
+        </div>
+        <div class="image-container">
+            <p>Frequnecy of elo ranges with a bin width of a 100 elo points</p>
+            <img src="Figure_2.png" alt="Description of Image 2">
+        </div>
+        <div class="image-container">
+            <p>Expected score at nationals based on the elo of the team</p>
+            <img src="Figure_3.png" alt="Description of Image 3">
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener('mousemove', function(e) {
+            const bg = document.querySelector('.cursor-follow-bg');
+            const x = e.clientX / window.innerWidth * 100;
+            const y = e.clientY / window.innerHeight * 100;
+            bg.style.backgroundPosition = `${x}% ${y}%`;
+        });
+    </script>
+</body>
+</html>
