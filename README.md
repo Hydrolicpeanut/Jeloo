@@ -17,7 +17,7 @@ Based on participation, national spots, and other factors, I gave each state a s
 
 From this, I took teams that had qualified for the national tournament and created an expected score that a team given a certain elo should score at nationals, then I compared this to how the teams actually did, adjusting the delta based on how far we were removed, from the competition. 
 
-[Link to the Rankings](https://hydrolicpeanut.github.io/Jeloo/)
+[Link to the Rankings](https://RajivJonnala.github.io/Jeloo/)
 
 #### Technologies
 
